@@ -1,0 +1,6 @@
+{
+    "owner": "org.openxsp", 
+    "main": "org.openxsp.DefaultVerticle", 
+    "version": "0.1", 
+    "name": "hello-world"
+}

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="openxsp-libs-0.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/signaling-plane/lib/openxsp-libs-0.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

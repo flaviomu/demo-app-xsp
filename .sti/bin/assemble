@@ -1,0 +1,48 @@
+#!/bin/bash -e
+#
+# S2I assemble script for the 'maa/openxsp' image.
+# The 'assemble' script builds your application source ready to run.
+#
+# For more information refer to the documentation:
+#	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
+#
+
+if [ "$1" = "-h" ]; then
+	# If the 'maa/openxsp' assemble script is executed with '-h' flag,
+	# print the usage.
+	exec /usr/local/sti/usage
+fi
+
+# Restore artifacts from the previous build (if they exist).
+#
+
+echo "---> Installing application source"
+cp -Rf /tmp/src/ /opt/signaling-plane/modules/demo-app-xsp/
+
+echo "---> Building application from source"
+# TODO: Add build steps for your application, eg npm install, bundle install
+
+OPENXSP="openxsp"
+GRADLEW="gradlew"
+
+cd /opt/signaling-plane/
+
+if [ -x $OPENXSP ]; then
+	chmod +x $OPENXSP;
+fi
+
+if [ $PATH==*/opt/signaling-plane* ]; then
+	export PATH=$PATH:/opt/signaling-plane
+fi 
+
+cd modules/demo-app-xsp
+
+if [ -x $GRADLEW ]; then
+	chmod +x $GRADLEW;
+fi
+
+if [ -z $OPENXSP_HOME ]; then
+	export OPENXSP_HOME=/opt/signaling-plane/;
+fi
+
+/opt/signaling-plane/modules/demo-app-xsp/gradlew compileJava
